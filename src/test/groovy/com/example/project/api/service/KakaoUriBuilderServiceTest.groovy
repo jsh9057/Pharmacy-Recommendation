@@ -1,6 +1,6 @@
 package com.example.project.api.service
 
-import org.springframework.boot.test.context.SpringBootTest
+
 import spock.lang.Specification
 
 import java.nio.charset.StandardCharsets
