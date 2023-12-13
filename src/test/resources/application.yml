@@ -4,7 +4,7 @@ spring:
     url: jdbc:tc:mariadb:10:///
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     show-sql: true
 
 kakao:
