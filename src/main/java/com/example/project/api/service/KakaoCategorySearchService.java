@@ -31,7 +31,7 @@ public class KakaoCategorySearchService {
         URI uri = kakaoUriBuilderService.buildUriByCategorySearch(latitude, longitude, radius, PHARMACY_CATEGORY);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set(HttpHeaders.AUTHORIZATION, "KakaoAk "+ kakaoRestApiKey);
+        headers.set(HttpHeaders.AUTHORIZATION, " KakaoAK "+ kakaoRestApiKey);
         HttpEntity httpEntity = new HttpEntity<>(headers);
 
         return restTemplate.exchange(uri, HttpMethod.GET, httpEntity, KakaoApiResponseDto.class).getBody();
