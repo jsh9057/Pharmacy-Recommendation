@@ -64,4 +64,4 @@ spring:
 pharmacy:
   recommendation:
     base:
-      url: http://localhost:8080/dir/ # todo: aws ec2 ip 할당 받은 후 변경
+      url: http://43.200.156.182/dir/
