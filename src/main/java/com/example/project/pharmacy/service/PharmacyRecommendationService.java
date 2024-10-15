@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StopWatch;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Collections;
@@ -27,6 +28,8 @@ public class PharmacyRecommendationService {
     private final KakaoAddressSearchService kakaoAddressSearchService;
     private final DirectionService directionService;
     private final Base62Service base62Service;
+
+    private final int RECOMMENDATION_SIZE = 3;
 
     private static final String ROAD_VIEW_BASE_URL = "https://map.kakao.com/link/roadview/";
     @Value("${pharmacy.recommendation.base.url}")
@@ -45,6 +48,10 @@ public class PharmacyRecommendationService {
 
         // 공공기관 약국 데이터 및 거리계산 알고리즘 이용
         List<Direction> directionList = directionService.buildDirectionList(documentDto);
+//        List<Direction> directionList = directionService.buildDirectionList(documentDto,documentDto.getDepth3());
+        if(directionList.size()<RECOMMENDATION_SIZE){
+            directionList = directionService.buildDirectionList(documentDto, documentDto.getDepth2());
+        }
 
         // kakao 카테고리를 이용한 장소 검색 api 이용
         // List<Direction> directionList = directionService.buildDirectionListByCategoryApi(documentDto);

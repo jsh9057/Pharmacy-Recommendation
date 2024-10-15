@@ -26,7 +26,7 @@ spring:
       on-profile: local
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://localhost:3306/pharmacy-recommendation
+    url: jdbc:mariadb://localhost:3306/pharmacy-recommendation?allowPublicKeyRetrieval=true&useSSL=false
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   redis:
@@ -50,7 +50,7 @@ spring:
       on-profile: prod
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://pharmacy-recommendation-database:3306/pharmacy-recommendation
+    url: jdbc:mariadb://pharmacy-recommendation-database:3306/pharmacy-recommendation?allowPublicKeyRetrieval=true&useSSL=false
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   redis:

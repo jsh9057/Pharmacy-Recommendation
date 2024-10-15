@@ -6,16 +6,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity(name = "pharmacy")
 @Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(indexes = {
+//        @Index(columnList = "depth1"),
+//        @Index(columnList = "depth2"),
+//        @Index(columnList = "depth3"),
+    })
 public class Pharmacy extends BaseTimeEntity {
 
     @Id
@@ -24,6 +26,9 @@ public class Pharmacy extends BaseTimeEntity {
 
     private String pharmacyName;
     private String pharmacyAddress;
+//    private String depth1;
+//    private String depth2;
+//    private String depth3;
     private double latitude;
     private double longitude;
 

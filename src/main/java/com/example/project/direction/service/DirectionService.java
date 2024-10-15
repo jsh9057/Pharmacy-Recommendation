@@ -50,6 +50,30 @@ public class DirectionService {
         return result;
     }
 
+    public List<Direction> buildDirectionList(DocumentDto documentDto, String depthName){
+        if(Objects.isNull(documentDto)) return Collections.emptyList();
+
+        return pharmacySearchService.searchPharmacyDtoList(depthName)
+                .stream().map(pharmacyDto ->
+                        Direction.builder()
+                                .inputAddress(documentDto.getAddressName())
+                                .inputLatitude(documentDto.getLatitude())
+                                .inputLongitude(documentDto.getLongitude())
+                                .targetPharmacyName(pharmacyDto.getPharmacyName())
+                                .targetAddress(pharmacyDto.getPharmacyAddress())
+                                .targetLatitude(pharmacyDto.getLatitude())
+                                .targetLongitude(pharmacyDto.getLongitude())
+                                .distance(
+                                        calculateDistance(documentDto.getLatitude(),documentDto.getLongitude(),
+                                                pharmacyDto.getLatitude(), pharmacyDto.getLongitude())
+                                )
+                                .build())
+                .filter(direction -> direction.getDistance() <= RADIUS_KM)
+                .sorted(Comparator.comparing(Direction::getDistance))
+                .limit(MAX_SEARCH_COUNT)
+                .collect(Collectors.toList());
+    }
+
     public List<Direction> buildDirectionList(DocumentDto documentDto) {
 
         if(Objects.isNull(documentDto)) return Collections.emptyList();
@@ -76,7 +100,7 @@ public class DirectionService {
 
     }
 
-    // pharmacy search by category kakao api
+    // search by category kakao api
     public List<Direction> buildDirectionListByCategoryApi(DocumentDto inputDocumentDto) {
         if(Objects.isNull(inputDocumentDto)) return Collections.emptyList();
 
